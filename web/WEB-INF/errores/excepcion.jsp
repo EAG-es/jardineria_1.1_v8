@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page isErrorPage="true" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,9 +29,12 @@
         <table>
         <tr valign="top">
             <td>
-                <% for (StackTraceElement stackTraceElement: pageContext.getException().getStackTrace()) { %>
+                <%-- for (StackTraceElement stackTraceElement: pageContext.getException().getStackTrace()) { %>
                     <%=stackTraceElement.toString()%><br>
-                <% } %>
+                <% } --%>
+                <c:forEach var="stackTraceElement" items="${pageContext.getException().getStackTrace()}">
+                    <c:out value="${stackTraceElement}"/>
+                </c:forEach>
             </td>
         </tr>
         </table>

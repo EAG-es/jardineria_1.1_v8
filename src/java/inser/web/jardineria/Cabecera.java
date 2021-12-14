@@ -24,6 +24,7 @@ public class Cabecera extends Index implements Serializable {
         if (lenguaje != null) {
             this.lenguaje = lenguaje;
             error_ret = Idiomas.poner_lenguaje(lenguaje);
+//            throw new RuntimeException("Error forzado");
         }
         if (error_ret == false){
              escribir_error(error[0]);

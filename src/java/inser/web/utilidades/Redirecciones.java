@@ -54,8 +54,8 @@ public class Redirecciones {
                 error[0] = "";
             }
             error[0] = "Error la redirecionar de http a https. " + error[0];
-            Logger.getLogger(Redirecciones.class.getCanonicalName()).log(Level.SEVERE, e.getStackTrace().toString());
             ret = false;
+            Logger.getLogger("inser").log(Level.SEVERE, error[0], e);
         }
         return ret;
     }

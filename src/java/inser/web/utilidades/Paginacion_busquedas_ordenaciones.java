@@ -6,6 +6,8 @@
 package inser.web.utilidades;
 
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -140,6 +142,7 @@ public class Paginacion_busquedas_ordenaciones extends Paginacion_busquedas_orde
             }
             error[0] = "Los datos recibidos para la paginación, la búsqueda y la ordenación no se pueden procesar. "
                     + error[0];
+            Logger.getLogger("inser").log(Level.SEVERE, error[0], e);
         }
         return ret;
     }

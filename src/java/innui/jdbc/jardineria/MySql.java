@@ -7,6 +7,8 @@ package innui.jdbc.jardineria;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -37,6 +39,7 @@ public class MySql {
             }
             error[0] = "Error al conectar en MySql. "
                     + error[0];
+            Logger.getLogger("inser").log(Level.SEVERE, error[0], e);
         }
         return ret;
     }

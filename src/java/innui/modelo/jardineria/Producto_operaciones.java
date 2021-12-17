@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -42,6 +44,7 @@ public class Producto_operaciones {
             }
             error[0] = "Error al listar productos. "
                     + error[0];
+            Logger.getLogger("innui").log(Level.SEVERE, error[0], e);
         }
         return retorno;
     }
@@ -119,6 +122,7 @@ public class Producto_operaciones {
             }
             error[0] = "Error al listar productos. "
                     + error[0];
+            Logger.getLogger("innui").log(Level.SEVERE, error[0], e);
         }
         return lista;
     }
@@ -170,6 +174,7 @@ public class Producto_operaciones {
             }
             error[0] = "Error al encontrar producto. "
                     + error[0];
+            Logger.getLogger("innui").log(Level.SEVERE, error[0], e);
         }
         return producto;
     }
@@ -195,6 +200,7 @@ public class Producto_operaciones {
             }
             error[0] = "Error al borrar producto. "
                     + error[0];
+            Logger.getLogger("innui").log(Level.SEVERE, error[0], e);
         }
         return ret;
     }
@@ -263,6 +269,7 @@ public class Producto_operaciones {
             }
             error[0] = "Error al crear producto. "
                     + error[0];
+            Logger.getLogger("innui").log(Level.SEVERE, error[0], e);
         }
         return ret;
     }
@@ -324,6 +331,7 @@ public class Producto_operaciones {
             }
             error[0] = "Error al actualizar producto. "
                     + error[0];
+            Logger.getLogger("innui").log(Level.SEVERE, error[0], e);
         }
         return ret;
     }

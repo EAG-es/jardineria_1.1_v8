@@ -14,6 +14,12 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.jsp.JspWriter;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Formatter;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  *
@@ -49,16 +55,15 @@ public class Index extends Controladores_vistas implements Serializable {
      */
     public void iniciar_javabean(HttpServletRequest request, HttpServletResponse response, JspWriter out, HttpSession session) {
         String [] error = { "" }; //NOI18N
-        boolean ret = true;
         httpServletRequest = request;
         httpServletResponse = response;
         jspWriter = out;
         httpSession = session;
-        error_ret = ret;
-        error_texto = error[0];
         if (error_ret) {
             obtener_parametros(httpServletRequest, error);
+            error_ret = configurar_log(error);
         }
+        error_texto = error[0];
     }
     
     /**
@@ -152,6 +157,7 @@ public class Index extends Controladores_vistas implements Serializable {
                 error[0] = ""; //NOI18N
             }
             error[0] = java.text.MessageFormat.format(java.util.ResourceBundle.getBundle("in/inser/web/jardineria/in").getString("EXCEPCIÓN AL ESCRIBIR EN EL JSP. {0}"), new Object[] {error[0]});
+            Logger.getLogger("inser").log(Level.SEVERE, error[0], e);
         }
         error_texto = error[0];
         return error_ret;
@@ -214,5 +220,58 @@ public class Index extends Controladores_vistas implements Serializable {
     
     public List leer_lista() {
         return null;
+    }
+    /**
+     * Configura los logger de Java
+     * Por defecto stderr y stdoout debe ir al log de Tomcat (carpeta logs, del servidor):
+     * Asegurarse de que en el archivo context.xml, en la etiqueta Context, está configurado el atributo swallowOutput="true"
+     * o lo esta en el archivo server.xml
+     * @param error
+     * @return 
+     */
+    public boolean configurar_log(String [] error) {
+        boolean ret = true;
+        Logger innui_logger;
+        Logger inclui_logger;
+        Logger inser_logger;
+        Handler [] handlers_array;
+        ConsoleHandler consoleHandler;
+        Formatter formatter;
+        consoleHandler = new ConsoleHandler();
+        formatter = new SimpleFormatter();
+        // Logger de las clases de modelo (sin interfaz de usuario)
+        innui_logger = Logger.getLogger("innui");
+        handlers_array = innui_logger.getHandlers();
+        if (handlers_array.length == 0) {
+            consoleHandler.setFormatter(formatter);
+            innui_logger.addHandler(consoleHandler);
+        } else {
+            for (Handler handle: handlers_array) {
+                handle.setFormatter(formatter);
+            }
+        }
+        // Logger de las clases básicas de consola (out y err)
+        inclui_logger = Logger.getLogger("inclui");
+        handlers_array = inclui_logger.getHandlers();
+        if (handlers_array.length == 0) {
+            consoleHandler.setFormatter(formatter);
+            inclui_logger.addHandler(consoleHandler);
+        } else {
+            for (Handler handle: handlers_array) {
+                handle.setFormatter(formatter);
+            }
+        }
+        // Logger de las clases de servidor
+        inser_logger = Logger.getLogger("inser");
+        handlers_array = inser_logger.getHandlers();
+        if (handlers_array.length == 0) {
+            consoleHandler.setFormatter(formatter);
+            inser_logger.addHandler(consoleHandler);
+        } else {
+            for (Handler handle: handlers_array) {
+                handle.setFormatter(formatter);
+            }
+        }
+        return ret;
     }
 }

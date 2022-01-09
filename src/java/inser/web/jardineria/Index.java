@@ -8,10 +8,6 @@ package inser.web.jardineria;
 import inser.web.utilidades.Controladores_vistas;
 import inser.web.utilidades.Idiomas;
 import inser.web.utilidades.Redirecciones;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.jsp.JspWriter;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.ConsoleHandler;
@@ -20,6 +16,10 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.JspWriter;
 
 /**
  *

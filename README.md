@@ -1,5 +1,5 @@
 # jardineria_1.1_v8
-Web App with JSP, JSTL and JDBC for Tomcat with internationalization
+Web App with JSP, JSTL and JDBC for Tomcat8 with internationalization
 
 Database sql in folder: Jardineria, for MySQL
 
